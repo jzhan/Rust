@@ -55,6 +55,26 @@ impl<T: Clone> LinkedList<T> {
     }
 }
 
+// Destructor
+impl <T: Clone> Drop for LinkedList<T> {
+    fn drop(&mut self) {
+        unsafe {
+            loop {
+                if self._head == std::ptr::null_mut() {
+                    self._tail = std::ptr::null_mut();
+
+                    break;
+                }
+
+                let temp = self._head;
+                self._head = (*temp)._next;
+
+                drop(Box::from_raw(temp));
+            }
+        }
+    }
+}
+
 fn main() {
     let mut list = LinkedList::new();
     
@@ -78,21 +98,25 @@ fn main() {
         }
     }
 
-    for i in 11..15 {
-        println!("Input {}", i);
+    let list = 10;
 
-        list.add(i);
-    }
+    println!("new: {}", list);
+
+    // for i in 11..15 {
+    //     println!("Input {}", i);
+
+    //     list.add(i);
+    // }
     
-    loop {
-        let val = list.get();
+    // loop {
+    //     let val = list.get();
         
-        if val != None {
-            println!("{}", val.unwrap());
-        } else {
-            println!("List is empty");
+    //     if val != None {
+    //         println!("{}", val.unwrap());
+    //     } else {
+    //         println!("List is empty");
 
-            break;
-        }
-    }
+    //         break;
+    //     }
+    // }
 }
