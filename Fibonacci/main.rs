@@ -9,9 +9,7 @@ fn main() {
     std::io::stdin().read_line(&mut buffer).expect("input failed");
 
     match buffer.trim().parse::<i64>() {
-        Ok(val) => {
-            let n = val;
-
+        Ok(n) => {
             let mut fib_1: i64 = 0;
             let mut fib_2: i64 = 1;
 
