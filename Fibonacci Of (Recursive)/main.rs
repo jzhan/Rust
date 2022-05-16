@@ -11,7 +11,7 @@ fn main() {
 
     match buffer.trim().parse::<u64>() {
         Ok(n) => {
-            println!("Fibonacci of {} is {}", n, fib_of(&n));
+            println!("Fibonacci of {} is {}", n, fib_of(n));
         },
 
         Err(_e) => {
@@ -20,13 +20,13 @@ fn main() {
     }
 }
 
-fn fib_of(num: &u64) -> u128 {
-    if *num <= 2 {
+fn fib_of(num: u64) -> u128 {
+    if num <= 2 {
         1
     } else {
         let fib_1 = num - 1;
         let fib_2 = num - 2;
 
-        fib_of(&fib_1) + fib_of(&fib_2)
+        fib_of(fib_1) + fib_of(fib_2)
     }
 }
